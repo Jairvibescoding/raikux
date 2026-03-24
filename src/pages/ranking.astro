@@ -26,7 +26,7 @@ const chartData = rankings.map(m => ({ name: m.name, score: m.score }));
       <!-- Filters -->
       <div class="flex flex-wrap gap-4 mb-12">
         {["Razonamiento", "Código", "Creatividad", "Velocidad"].map((filter) => (
-          <button class="px-6 py-2 rounded-full border border-border bg-white text-ink font-bold uppercase tracking-widest text-xs hover:border-orange hover:text-orange transition-all">
+          <button style="background: transparent; border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.8); border-radius: 20px; padding: 6px 16px; font-size: 12px; font-weight: 600; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em; transition: all 0.2s;">
             {filter}
           </button>
         ))}

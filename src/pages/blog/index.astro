@@ -34,7 +34,13 @@ posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
             {/* Imagen Cover Base (Todo el fondo) */}
             <div class="absolute inset-0 bg-surface z-0">
               {post.data.thumbnail && (
-                <img src={post.data.thumbnail} alt={post.data.title} class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 group-hover:scale-110 transition-all duration-[800ms] ease-out saturate-50 group-hover:saturate-100" loading="lazy" />
+                <img 
+                  src={post.data.thumbnail} 
+                  alt={post.data.title} 
+                  class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 group-hover:scale-110 transition-all duration-[800ms] ease-out saturate-50 group-hover:saturate-100" 
+                  loading="lazy" 
+                  onerror="this.src='https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=400&h=200&fit=crop';"
+                />
               )}
             </div>
 

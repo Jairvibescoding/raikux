@@ -99,7 +99,14 @@ import { useEffect, useState } from 'react';
          {filteredNews.map(item => ( 
            <a key={item.id} href={item.link} target="_blank" rel="noopener noreferrer" 
              style={{background: '#fff', border: '1px solid rgba(17,17,16,0.07)', borderRadius: '12px', overflow: 'hidden', textDecoration: 'none', display: 'block'}}> 
-             <img src={item.image} alt={item.title} style={{width: '100%', height: '150px', objectFit: 'crop'}} />
+             <img 
+               src={item.image} 
+               alt={item.title} 
+               style={{width: '100%', height: '150px', objectFit: 'cover'}} 
+               onError={(e) => { 
+                 e.currentTarget.src = 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=400&h=200&fit=crop'; 
+               }}
+             />
              <div style={{padding: '1.1rem 1.2rem'}}>
                <div style={{fontSize: '10px', fontWeight: 500, color: '#E8522A', textTransform: 'uppercase', marginBottom: '6px', letterSpacing: '.08em'}}>{item.category}</div> 
                <div style={{fontSize: '14px', fontWeight: 600, color: '#111110', lineHeight: 1.35, marginBottom: '8px', fontFamily: 'Syne, sans-serif'}}>{item.title}</div> 

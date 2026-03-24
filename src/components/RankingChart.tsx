@@ -7,7 +7,7 @@ interface Props {
 
 const RankingChart: React.FC<Props> = ({ data }) => {
   return (
-    <div className="w-full h-[400px] glass-panel p-8 mt-12 animate-fade-up">
+    <div className="w-full h-[400px] p-8 mt-12 animate-fade-up" style={{ background: 'transparent' }}>
       <h3 className="font-display text-2xl text-white tracking-tighter mb-8 uppercase leading-none">
         Visualización <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-light to-orange">Estratégica</span>
       </h3>
@@ -34,12 +34,12 @@ const RankingChart: React.FC<Props> = ({ data }) => {
               boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5)'
             }}
           />
-          <Bar dataKey="score" radius={[0, 6, 6, 0]} barSize={28}>
+          <Bar dataKey="score" radius={[0, 6, 6, 0]} barSize={28} fill="#E8522A" fillOpacity={1}>
             {data.map((entry, index) => (
               <Cell 
                 key={`cell-${index}`} 
-                fill={index === 0 ? '#E8522A' : '#F2724D'} 
-                fillOpacity={1 - index * 0.12}
+                fill="#E8522A"
+                fillOpacity={1}
                 className="hover:opacity-80 transition-opacity duration-300 cursor-pointer"
               />
             ))}
