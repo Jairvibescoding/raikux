@@ -1,24 +1,24 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import Navbar from '../../../components/Navbar.astro';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
   return posts.map(post => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: { post },
   }));
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 const siteUrl = "https://raikux.github.io";
-const articleUrl = `${siteUrl}/raikux/blog/${post.slug}`;
+const articleUrl = `${siteUrl}/raikux/blog/${post.id}`;
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description} currentPath={`/blog/${post.slug}`}>
+<BaseLayout title={post.data.title} description={post.data.description} currentPath={`/blog/${post.id}`}>
   <Navbar />
   
   <script type="application/ld+json" set:html={JSON.stringify({

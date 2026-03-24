@@ -18,7 +18,7 @@ posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {posts.map((post, index) => (
-        <a href={`/raikux/blog/${post.slug}/`} class={`glass-panel p-6 group block hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange/20 transition-all duration-300 animate-fade-up`} style={`animation-delay: ${(index + 1) * 100}ms`}>
+        <a href={`/raikux/blog/${post.id}/`} class={`glass-panel p-6 group block hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange/20 transition-all duration-300 animate-fade-up`} style={`animation-delay: ${(index + 1) * 100}ms`}>
           <div class="mb-5 overflow-hidden rounded-xl bg-surface-elevated aspect-video relative ring-1 ring-white/5 group-hover:ring-orange/30 transition-all">
             <div class="absolute inset-0 flex items-center justify-center text-ink-faint group-hover:scale-110 transition-transform duration-500">
               <span class="font-display text-xl tracking-widest opacity-20">RAIKU</span>
