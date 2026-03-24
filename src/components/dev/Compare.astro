@@ -1,0 +1,40 @@
+---
+const editors = [
+  { name: "Cursor", ia: "Claude / GPT-4", price: "$20/mes", bestFor: "Edición multi-archivo" },
+  { name: "Trae", ia: "Claude 4 / Gemini", price: "Gratis", bestFor: "Builder Mode" },
+  { name: "Antigravity", ia: "Agent-based", price: "$50/mes", bestFor: "Testing autónomo" },
+  { name: "VS Code + Copilot", ia: "GPT-4", price: "$10/mes", bestFor: "Integración nativa" },
+];
+---
+
+<section class="py-24 sm:py-32 bg-surface">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="font-display text-3xl md:text-4xl tracking-tighter">
+        Compara <span class="text-orange">editores</span>
+      </h2>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="border-b border-border">
+            <th class="p-4 text-sm font-bold uppercase text-ink-faint">Editor</th>
+            <th class="p-4 text-sm font-bold uppercase text-ink-faint">IA Incluida</th>
+            <th class="p-4 text-sm font-bold uppercase text-ink-faint">Precio</th>
+            <th class="p-4 text-sm font-bold uppercase text-ink-faint">Mejor para</th>
+          </tr>
+        </thead>
+        <tbody>
+          {editors.map(editor => (
+            <tr class="border-b border-border">
+              <td class="p-4 font-bold text-ink">{editor.name}</td>
+              <td class="p-4 text-ink-mid">{editor.ia}</td>
+              <td class="p-4 text-ink-mid">{editor.price}</td>
+              <td class="p-4 text-ink-mid">{editor.bestFor}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

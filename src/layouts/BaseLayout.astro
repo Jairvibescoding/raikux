@@ -1,0 +1,78 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  currentPath?: string;
+}
+
+const { 
+  title, 
+  description = "Raiku — Portal informativo en tiempo real sobre IA, marketing y programación.",
+  currentPath = ""
+} = Astro.props;
+
+const siteUrl = "https://raikux.github.io";
+const canonicalUrl = `${siteUrl}${currentPath}`;
+const ogImage = `${siteUrl}/og-image.png`;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="google-site-verification" content="MJA5VS7y6pu7veJ8ot-YLAwlwbK8x2aX8_DNp3QtORk" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <script is:inline>
+      (function(){ 
+        var redirect = sessionStorage.redirect; 
+        delete sessionStorage.redirect; 
+        if (redirect && redirect !== window.location.href) { 
+          window.history.replaceState(null, null, redirect); 
+        } 
+      })(); 
+    </script>
+
+    <!-- SEO -->
+    <title>Raiku — {title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={`Raiku — ${title}`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={`Raiku — ${title}`} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Raiku",
+      "url": siteUrl,
+      "description": description,
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": `${siteUrl}/search?q={search_term_string}`,
+        "query-input": "required name=search_term_string"
+      }
+    })} />
+    
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+  <body class="bg-surface text-ink font-sans">
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,43 @@
+---
+---
+<nav class="sticky top-0 z-50 w-full bg-surface-elevated/70 backdrop-blur-xl border-b border-white/5 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+      <!-- Logo -->
+      <a href="/raikux/" class="flex items-center gap-3 group">
+        <div class="relative w-10 h-10 bg-gradient-to-br from-orange-light to-orange-deep rounded-2xl flex items-center justify-center shadow-lg shadow-orange/20 overflow-hidden group-hover:scale-105 transition-transform duration-300">
+          <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div class="w-2.5 h-2.5 bg-white rounded-full z-10 relative"></div>
+          {/* 8 lines coming out */}
+          {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => (
+            <div 
+              class="absolute w-0.5 h-1.5 bg-white/60 z-10" 
+              style={`transform: rotate(${deg}deg) translateY(-8px)`}
+            ></div>
+          ))}
+        </div>
+        <span class="font-display text-[1.2rem] tracking-tighter text-white leading-none">
+          RAIK<span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-light to-orange animate-pulse">U</span>
+        </span>
+      </a>
+
+      <!-- Links -->
+      <div class="hidden md:flex items-center gap-8">
+        <a href="/raikux/" class="text-ink-mid hover:text-white transition-colors font-medium text-sm hover:scale-105 inline-block">Dashboard</a>
+        <a href="/raikux/ranking/" class="text-ink-mid hover:text-white transition-colors font-medium text-sm hover:scale-105 inline-block">Ranking IA</a>
+        <a href="/raikux/noticias/" class="text-ink-mid hover:text-white transition-colors font-medium text-sm hover:scale-105 inline-block">Noticias</a>
+        <a href="/raikux/marketing/" class="text-ink-mid hover:text-white transition-colors font-medium text-sm hover:scale-105 inline-block">Marketing</a>
+        <a href="/raikux/dev/" class="text-ink-mid hover:text-white transition-colors font-medium text-sm hover:scale-105 inline-block">Dev</a>
+        <a href="/raikux/blog/" class="text-ink-mid hover:text-white transition-colors font-medium text-sm hover:scale-105 inline-block">Blog</a>
+      </div>
+
+      <!-- CTA -->
+      <div class="flex items-center gap-4">
+        <button class="flex items-center gap-2 bg-gradient-to-r from-orange to-orange-deep text-white px-6 py-2.5 rounded-2xl font-medium text-sm hover:from-orange-light hover:to-orange transition-all shadow-lg shadow-orange/25 hover:shadow-orange/40 hover:-translate-y-0.5">
+          <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse-green"></span>
+          En vivo
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

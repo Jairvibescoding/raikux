@@ -1,0 +1,42 @@
+---
+import NewsCard from './NewsCard.astro';
+
+interface News {
+  id: number;
+  category: string;
+  title: string;
+  time: string;
+  score: number;
+}
+
+interface Props {
+  news: News[];
+}
+
+const { news } = Astro.props;
+---
+
+<section class="py-24 sm:py-32 bg-surface">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-end mb-12">
+      <div class="max-w-xl">
+        <h2 class="font-display text-[1.8rem] text-ink tracking-tighter mb-4 leading-none uppercase">
+          Feed de <span class="text-orange">noticias</span> IA
+        </h2>
+        <p class="text-ink-mid text-lg font-medium italic opacity-70">
+          Curación inteligente de lo último en el ecosistema.
+        </p>
+      </div>
+      <a href="/raikux/noticias/" class="text-orange font-bold uppercase tracking-widest text-sm hover:text-orange-deep transition-all flex items-center gap-2 group">
+        Ver todo
+        <span class="group-hover:translate-x-1 transition-transform">→</span>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {news.map((item) => (
+        <NewsCard {...item} />
+      ))}
+    </div>
+  </div>
+</section>

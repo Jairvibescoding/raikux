@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import EditorPoll from '../components/dev/EditorPoll.tsx';
+
+const editors = [
+  { name: "Cursor", model: "Claude / GPT-4", plan: "Freemium", desc: "Edición precisa con IA, multi-archivo.", planColor: "#EAF3DE", textColor: "#27500A" },
+  { name: "Trae", model: "Claude 4 / Gemini", plan: "Gratis", desc: "Builder Mode, Claude 4 gratis.", planColor: "#E0F2FE", textColor: "#0369A1" },
+  { name: "Antigravity", model: "Agent-based", plan: "De pago", desc: "Agente autónomo, testing en browser.", planColor: "#FEF3EF", textColor: "#C43E1A" },
+  { name: "VS Code + Copilot", model: "GPT-4", plan: "De pago", desc: "El clásico mejorado con IA.", planColor: "#F3F4F6", textColor: "#374151" },
+];
+---
+
+<BaseLayout title="Dev — Raiku" description="Los mejores editores y herramientas IA para developers en 2026" currentPath="/dev/">
+  <Navbar />
+  
+  <main style="background: #FAFAF8; min-h-screen;">
+    <section style="padding: 4rem 2rem; max-width: 1100px; margin: 0 auto;">
+      <h1 style="font-family: 'Syne', sans-serif; font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 800; color: #111110; letter-spacing: -1px; margin-bottom: 1.5rem; line-height: 1.1;">
+        Desarrolla más rápido <span style="color: #E8522A;">con IA</span>
+      </h1>
+      <p style="font-size: 1.1rem; color: #5C5651; line-height: 1.65; max-width: 650px; margin-bottom: 4rem;">
+        Los mejores editores, modelos y herramientas para developers 
+        que quieren multiplicar su productividad en 2026.
+      </p>
+
+      <!-- Grid editores -->
+      <h2 style="font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; margin-bottom: 2rem; color: #111110; letter-spacing: -0.5px;">
+        Los mejores <span style="color: #E8522A;">editores con IA</span>
+      </h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 5rem;">
+        {editors.map(editor => (
+          <div style="background: #fff; border: 1px solid rgba(17,17,16,0.07); border-radius: 16px; padding: 1.5rem; transition: all 0.3s ease; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+              <span style="font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: #111110;">{editor.name}</span>
+              <span style={`background: ${editor.planColor}; color: ${editor.textColor}; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px;`}>
+                {editor.plan}
+              </span>
+            </div>
+            <p style="font-size: 0.9rem; color: #E8522A; font-weight: 600; margin-bottom: 8px;">IA: {editor.model}</p>
+            <p style="font-size: 0.95rem; color: #5C5651; line-height: 1.5;">{editor.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Comparativa -->
+      <div style="background: #fff; border: 1px solid rgba(17,17,16,0.07); border-radius: 20px; padding: 2.5rem; margin-bottom: 5rem; overflow-x: auto;">
+        <h3 style="font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; margin-bottom: 2rem; color: #111110;">Compara <span style="color: #E8522A;">especificaciones</span></h3>
+        <table style="width: 100%; border-collapse: collapse; min-width: 600px;">
+          <thead>
+            <tr style="border-bottom: 2px solid #FAFAF8;">
+              <th style="text-align: left; padding: 12px; color: #B8B0AB; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Editor</th>
+              <th style="text-align: left; padding: 12px; color: #B8B0AB; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Precio</th>
+              <th style="text-align: left; padding: 12px; color: #B8B0AB; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">Mejor para</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid #FAFAF8;">
+              <td style="padding: 16px 12px; font-weight: 700; color: #111110;">Cursor</td>
+              <td style="padding: 16px 12px; color: #5C5651;">$20/mes</td>
+              <td style="padding: 16px 12px; color: #5C5651;">Edición multi-archivo</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #FAFAF8;">
+              <td style="padding: 16px 12px; font-weight: 700; color: #111110;">Trae</td>
+              <td style="padding: 16px 12px; color: #E8522A; font-weight: 600;">Gratis</td>
+              <td style="padding: 16px 12px; color: #5C5651;">Builder Mode & Claude 4</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #FAFAF8;">
+              <td style="padding: 16px 12px; font-weight: 700; color: #111110;">Antigravity</td>
+              <td style="padding: 16px 12px; color: #5C5651;">$50/mes</td>
+              <td style="padding: 16px 12px; color: #5C5651;">Agentes autónomos</td>
+            </tr>
+            <tr>
+              <td style="padding: 16px 12px; font-weight: 700; color: #111110;">VS Code</td>
+              <td style="padding: 16px 12px; color: #5C5651;">$10/mes</td>
+              <td style="padding: 16px 12px; color: #5C5651;">Ecosistema de extensiones</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Votación -->
+      <div style="max-width: 600px; margin: 0 auto;">
+        <EditorPoll client:visible />
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+

@@ -1,0 +1,67 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Navbar from '../../../components/Navbar.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const siteUrl = "https://raikux.github.io";
+const articleUrl = `${siteUrl}/raikux/blog/${post.slug}`;
+---
+
+<BaseLayout title={post.data.title} description={post.data.description} currentPath={`/blog/${post.slug}`}>
+  <Navbar />
+  
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": post.data.title,
+    "description": post.data.description,
+    "author": {
+      "@type": "Person",
+      "name": post.data.author
+    },
+    "datePublished": post.data.date.toISOString(),
+    "publisher": {
+      "@type": "Organization",
+      "name": "Raiku",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${siteUrl}/favicon.svg`
+      }
+    }
+  })} />
+  
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 py-24">
+    <header class="mb-14 text-center animate-fade-up">
+      <div class="flex items-center justify-center gap-3 mb-6">
+        <span class="label-tag text-orange bg-orange/10 border border-orange/20 px-4 py-1.5 rounded-full">{post.data.category}</span>
+        <span class="text-ink-mid text-sm font-medium">{post.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+      </div>
+      <h1 class="font-display text-4xl md:text-5xl text-white mb-8 leading-[1.15]">{post.data.title}</h1>
+      <div class="flex items-center justify-center gap-4 text-ink-mid pt-4 border-t border-border/50 max-w-xs mx-auto">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-orange to-orange-deep flex items-center justify-center text-white font-bold shadow-lg shadow-orange/20">RJ</div>
+        <div class="text-left">
+          <div class="font-medium text-white text-base">{post.data.author}</div>
+          <div class="text-xs text-white/50 tracking-widest uppercase mt-0.5">Autor</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="glass-panel p-8 md:p-12 animate-fade-up animate-delay-200">
+      <div class="prose prose-invert prose-orange max-w-none prose-headings:font-display prose-headings:tracking-tight prose-a:text-orange hover:prose-a:text-orange-light prose-p:text-ink-mid prose-p:leading-relaxed prose-li:text-ink-mid prose-strong:text-white">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

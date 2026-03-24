@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navbar from '../components/Navbar.astro';
+import RankingTable from '../components/RankingTable.tsx';
+import RankingChart from '../components/RankingChart.tsx';
+import { getAIRankings } from '../lib/supabase';
+
+const rankings = await getAIRankings();
+const chartData = rankings.map(m => ({ name: m.name, score: m.score }));
+---
+
+<BaseLayout title="Ranking IA — Modelos de Vanguardia" currentPath="/ranking">
+  <Navbar />
+  
+  <main class="py-24 bg-surface">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-12">
+        <h1 class="font-display text-[1.8rem] md:text-[2.2rem] text-ink tracking-tighter mb-4 leading-none uppercase">
+          Ranking <span class="text-orange">Global</span> de IAs
+        </h1>
+        <p class="text-ink-mid text-xl font-medium italic opacity-70 max-w-2xl">
+          Evaluación continua de modelos masivos de lenguaje basados en benchmarks públicos y pruebas de razonamiento real.
+        </p>
+      </div>
+
+      <!-- Filters -->
+      <div class="flex flex-wrap gap-4 mb-12">
+        {["Razonamiento", "Código", "Creatividad", "Velocidad"].map((filter) => (
+          <button class="px-6 py-2 rounded-full border border-border bg-white text-ink font-bold uppercase tracking-widest text-xs hover:border-orange hover:text-orange transition-all">
+            {filter}
+          </button>
+        ))}
+      </div>
+      
+      <RankingTable client:load data={rankings} />
+      
+      <div class="mt-24">
+        <RankingChart client:visible data={chartData} />
+      </div>
+    </div>
+  </main>
+</BaseLayout>

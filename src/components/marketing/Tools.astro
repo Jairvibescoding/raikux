@@ -1,0 +1,36 @@
+---
+const tools = [
+  { name: "ChatGPT", use: "Copys, emails, estrategias de contenido", plan: "Freemium" },
+  { name: "Midjourney", use: "Imágenes y creatividades para campañas", plan: "De pago" },
+  { name: "Claude", use: "Análisis de audiencia y estrategia de marca", plan: "Freemium" },
+  { name: "Canva AI", use: "Diseño de posts y materiales visuales", plan: "Freemium" },
+  { name: "Jasper", use: "Automatización de contenido a escala", plan: "De pago" },
+  { name: "Surfer SEO", use: "Optimización de contenido para Google", plan: "De pago" },
+];
+---
+
+<section class="py-24 sm:py-32">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="font-display text-3xl md:text-4xl tracking-tighter">
+        Herramientas IA para <span class="text-orange">Marketers</span>
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {tools.map(tool => (
+        <div class="bg-white border border-border rounded-2xl p-6 flex flex-col">
+          <div class="flex justify-between items-start mb-4">
+            <h3 class="font-display text-2xl text-ink">{tool.name}</h3>
+            <span class={`text-xs font-bold uppercase px-3 py-1 rounded-full ${tool.plan === 'Freemium' ? 'bg-green-100 text-green-800' : 'bg-orange-pale text-orange-deep'}`}>
+              {tool.plan}
+            </span>
+          </div>
+          <p class="text-ink-mid mb-6 flex-grow">{tool.use}</p>
+          <button class="w-full bg-orange text-white font-bold py-3 rounded-lg hover:bg-orange-light transition-colors">
+            Explorar
+          </button>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

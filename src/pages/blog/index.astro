@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navbar from '../../components/Navbar.astro';
+
+const posts = await getCollection('blog');
+posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Blog | Raiku" description="Artículos y análisis sobre IA y Marketing">
+  <Navbar />
+  
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="mb-16 animate-fade-up border-b border-border pb-8">
+      <h1 class="font-display text-4xl md:text-5xl text-white mb-4">Nuestro <span class="text-gradient">Blog</span></h1>
+      <p class="text-ink-mid text-lg max-w-2xl">Últimos artículos, tutoriales y análisis predictivos en el mundo del marketing y la inteligencia artificial.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {posts.map((post, index) => (
+        <a href={`/raikux/blog/${post.slug}/`} class={`glass-panel p-6 group block hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange/20 transition-all duration-300 animate-fade-up`} style={`animation-delay: ${(index + 1) * 100}ms`}>
+          <div class="mb-5 overflow-hidden rounded-xl bg-surface-elevated aspect-video relative ring-1 ring-white/5 group-hover:ring-orange/30 transition-all">
+            <div class="absolute inset-0 flex items-center justify-center text-ink-faint group-hover:scale-110 transition-transform duration-500">
+              <span class="font-display text-xl tracking-widest opacity-20">RAIKU</span>
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-3 mb-3">
+            <span class="label-tag text-orange">{post.data.category}</span>
+            <span class="text-ink-faint text-xs">•</span>
+            <span class="text-ink-mid text-sm">{post.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+          </div>
+          
+          <h2 class="font-display text-xl text-white mb-3 group-hover:text-orange transition-colors">{post.data.title}</h2>
+          <p class="text-ink-mid text-sm line-clamp-3 mb-5 leading-relaxed">{post.data.description}</p>
+          
+          <div class="flex items-center gap-3 text-white/90 text-sm font-medium">
+            <span class="w-8 h-8 rounded-full bg-gradient-to-tr from-orange to-orange-deep flex items-center justify-center text-xs text-white shadow-md">RJ</span>
+            {post.data.author}
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+</BaseLayout>

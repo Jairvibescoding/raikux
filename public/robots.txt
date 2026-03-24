@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://raikux.github.io/sitemap-index.xml

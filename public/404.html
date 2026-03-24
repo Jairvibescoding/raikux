@@ -1,0 +1,12 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<script> 
+  var seg = window.location.pathname.split('/').length; 
+  var path = window.location.pathname.slice(1); 
+  sessionStorage.redirect = window.location.href; 
+  window.location.replace('/' + path.split('/').slice(0, seg <= 2 ? 1 : 2).join('/') + '/?p=/' + path.slice(path.indexOf('/', 1) + 1).replace(/&/g, '~and~') + (window.location.search ? '&q=' + window.location.search.slice(1).replace(/&/g, '~and~') : '') + window.location.hash); 
+</script> 
+</head> 
+<body></body> 
+</html> 
