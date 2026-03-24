@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
 
 interface Props {
@@ -42,7 +42,7 @@ const ogImage = `${siteUrl}/og-image.png`;
     <title>Raiku — {title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
-    <ViewTransitions />
+    <ClientRouter />
     
     <!-- Open Graph -->
     <meta property="og:type" content="website" />

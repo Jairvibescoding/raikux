@@ -17,6 +17,6 @@ En lugar de crear 5 variantes de un anuncio, hoy los modelos generan miles de va
 ## 2. Agentes vs Prompts
 Ya no hacemos "prompting" básico. Construimos pipelines donde un agente investiga el mercado, otro redacta y un tercero audita el tono de voz de la marca.
 
-<div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl my-8">
-  <iframe src="https://www.youtube.com/embed/SQRp4YwVxy?modestbranding=1&rel=0" className="absolute inset-0 w-full h-full" allowFullScreen></iframe>
+<div class="relative w-full rounded-2xl overflow-hidden shadow-2xl my-8" style="aspect-ratio: 16/9; border-radius: 1rem;">
+  <iframe src="https://www.youtube.com/embed/SQRp4YwVxy?modestbranding=1&rel=0" style="width: 100%; height: 100%;" allowfullscreen></iframe>
 </div>
