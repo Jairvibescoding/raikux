@@ -10,27 +10,30 @@ interface Props {
 const { category, title, time, score, link = "#" } = Astro.props;
 ---
 
-<article class="glass-panel group p-7 transition-all duration-300 hover:border-orange/40 hover:shadow-2xl hover:shadow-orange/15 hover:-translate-y-1 flex flex-col justify-between relative overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-br from-orange/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+<article 
+  class="relative overflow-hidden backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-7 transition-all duration-300 ease-out hover:scale-105 hover:shadow-[0_25px_50px_-12px_rgba(232,82,42,0.25)] hover:border-orange/50 hover:z-10 group flex flex-col justify-between cursor-pointer" 
+  data-animate
+>
+  <div class="absolute inset-0 bg-gradient-to-br from-orange/10 via-transparent to-orange-deep/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
 
   <a href={link} target="_blank" rel="noopener noreferrer" class="relative z-10 block">
     <div>
-      <span class="text-orange label-tag block mb-3 uppercase tracking-[0.15em] text-xs font-bold font-sans">{category}</span>
-      <h3 class="font-display text-[1.15rem] font-bold text-white leading-[1.4] mb-5 group-hover:text-orange-light transition-colors line-clamp-3">
+      <span class="text-orange label-tag block mb-3 uppercase tracking-[0.15em] text-xs font-bold font-sans drop-shadow-md">{category}</span>
+      <h3 class="font-display text-[1.15rem] font-bold text-white leading-[1.4] mb-5 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-orange-light group-hover:to-orange transition-colors line-clamp-3">
         {title}
       </h3>
     </div>
   </a>
   
-  <div class="space-y-4 relative z-10 mt-auto pt-4 border-t border-white/5">
+  <div class="space-y-4 relative z-10 mt-auto pt-4 border-t border-white/10 group-hover:border-orange/30 transition-colors">
     <div class="flex justify-between items-center">
-      <span class="text-ink-mid text-xs font-medium italic">{time}</span>
-      <span class="text-ink-faint text-xs font-bold uppercase tracking-widest bg-white/5 px-2 py-1 rounded-md">{score}%</span>
+      <span class="text-ink-mid text-xs font-medium italic group-hover:text-white/70 transition-colors">{time}</span>
+      <span class="text-ink-faint text-xs font-bold uppercase tracking-widest bg-white/5 backdrop-blur-md px-2.5 py-1 rounded-md border border-white/10 group-hover:border-orange/30 group-hover:text-orange-light transition-all">{score}%</span>
     </div>
     
-    <div class="h-1 w-full bg-surface-elevated rounded-full overflow-hidden relative">
+    <div class="h-1.5 w-full bg-surface-elevated rounded-full overflow-hidden relative ring-1 ring-white/5 group-hover:ring-orange/20 transition-all">
       <div 
-        class="absolute left-0 top-0 bottom-0 bg-gradient-to-r from-orange to-orange-deep rounded-full transition-all duration-1000 ease-out group-hover:from-orange-light group-hover:to-orange shadow-[0_0_8px_rgba(232,82,42,0.5)]" 
+        class="absolute left-0 top-0 bottom-0 bg-gradient-to-r from-orange to-orange-deep rounded-full transition-all duration-[1200ms] ease-out group-hover:from-orange-light group-hover:to-orange shadow-[0_0_12px_rgba(232,82,42,0.8)]" 
         style={`width: ${score}%`}
       ></div>
     </div>

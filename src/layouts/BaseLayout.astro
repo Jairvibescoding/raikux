@@ -76,5 +76,19 @@ const ogImage = `${siteUrl}/og-image.png`;
   </head>
   <body class="bg-surface text-ink font-sans selection:bg-orange/30 selection:text-white">
     <slot />
+    
+    <script>
+      document.addEventListener('astro:page-load', () => {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in-view');
+            }
+          });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        
+        document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+      });
+    </script>
   </body>
 </html>
