@@ -15,45 +15,46 @@ export const RankingTable: React.FC<Props> = ({ data }) => {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    setAnimate(true);
+    const timer = setTimeout(() => setAnimate(true), 150);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div class="w-full overflow-x-auto bg-white border border-border rounded-2xl p-8">
-      <table class="w-full text-left border-collapse">
+    <div className="w-full overflow-x-auto glass-panel border border-white/5 rounded-2xl p-8 animate-fade-up animate-delay-100">
+      <table className="w-full text-left border-collapse">
         <thead>
-          <tr class="border-b border-border">
-            <th class="py-6 px-4 label-tag text-ink-faint">Rank</th>
-            <th class="py-6 px-4 label-tag text-ink-faint">Modelo</th>
-            <th class="py-6 px-4 label-tag text-ink-faint">Score</th>
-            <th class="py-6 px-4 label-tag text-ink-faint">Cambio</th>
-            <th class="py-6 px-4 label-tag text-ink-faint">Progreso</th>
+          <tr className="border-b border-white/10">
+            <th className="py-6 px-4 label-tag text-ink-faint">Rank</th>
+            <th className="py-6 px-4 label-tag text-ink-faint">Modelo</th>
+            <th className="py-6 px-4 label-tag text-ink-faint">Score</th>
+            <th className="py-6 px-4 label-tag text-ink-faint">Cambio</th>
+            <th className="py-6 px-4 label-tag text-ink-faint">Progreso</th>
           </tr>
         </thead>
         <tbody>
-          {data.map((model) => (
-            <tr key={model.name} class="group border-b border-border hover:bg-orange-pale transition-all">
-              <td class={`py-6 px-4 font-display text-[0.9rem] ${model.rank === 1 ? 'text-orange' : 'text-ink'}`}>
+          {data.map((model, idx) => (
+            <tr key={model.name} className="group border-b border-white/5 hover:bg-white/5 transition-all duration-300">
+              <td className={`py-6 px-4 font-display text-[1.1rem] ${model.rank === 1 ? 'text-orange drop-shadow-[0_0_8px_rgba(232,82,42,0.8)]' : 'text-white'}`}>
                 #{model.rank}
               </td>
-              <td class="py-6 px-4">
-                <span class="font-sans text-[0.95rem] font-semibold text-ink tracking-tight group-hover:text-orange transition-colors">
+              <td className="py-6 px-4">
+                <span className="font-sans text-[1.05rem] font-semibold text-white tracking-tight group-hover:text-orange-light transition-colors">
                   {model.name}
                 </span>
               </td>
-              <td class="py-6 px-4 font-display text-[0.95rem] text-ink">
+              <td className="py-6 px-4 font-display text-[1rem] text-white/90">
                 {model.score}
               </td>
-              <td class="py-6 px-4">
-                <div class={`flex items-center gap-1 font-bold text-[0.85rem] ${model.change > 0 ? 'text-green-600' : model.change < 0 ? 'text-red-600' : 'text-ink-faint'}`}>
+              <td className="py-6 px-4">
+                <div className={`flex items-center gap-1 font-bold text-[0.85rem] ${model.change > 0 ? 'text-green-400' : model.change < 0 ? 'text-red-400' : 'text-ink-mid'}`}>
                   {model.change > 0 ? '↑' : model.change < 0 ? '↓' : '•'}
                   {Math.abs(model.change)}
                 </div>
               </td>
-              <td class="py-6 px-4 w-40">
-                <div class="h-2 w-full bg-border rounded-full overflow-hidden">
+              <td className="py-6 px-4 w-48">
+                <div className="h-2.5 w-full bg-surface-elevated rounded-full overflow-hidden ring-1 ring-white/5">
                   <div 
-                    class="h-full bg-orange transition-all duration-1000 ease-out rounded-full"
+                    className="h-full bg-gradient-to-r from-orange-light to-orange transition-all duration-1000 ease-out rounded-full shadow-[0_0_10px_rgba(232,82,42,0.5)]"
                     style={{ 
                       width: animate ? `${model.score}%` : '0%',
                       opacity: animate ? 1 : 0

@@ -7,9 +7,9 @@ interface Props {
 
 const RankingChart: React.FC<Props> = ({ data }) => {
   return (
-    <div className="w-full h-[400px] bg-white border border-border rounded-2xl p-8 mt-12">
-      <h3 className="font-display text-2xl text-ink tracking-tighter mb-8 uppercase leading-none">
-        Visualización <span className="text-orange">Estratégica</span>
+    <div className="w-full h-[400px] glass-panel p-8 mt-12 animate-fade-up">
+      <h3 className="font-display text-2xl text-white tracking-tighter mb-8 uppercase leading-none">
+        Visualización <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-light to-orange">Estratégica</span>
       </h3>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} layout="vertical" margin={{ top: 5, right: 30, left: 40, bottom: 5 }}>
@@ -19,24 +19,28 @@ const RankingChart: React.FC<Props> = ({ data }) => {
             dataKey="name" 
             axisLine={false} 
             tickLine={false}
-            tick={{ fill: '#111110', fontFamily: 'Syne', fontWeight: 600, fontSize: 12 }}
+            tick={{ fill: '#B8B0AB', fontFamily: 'Syne', fontWeight: 600, fontSize: 13 }}
             width={120}
           />
           <Tooltip 
-            cursor={{ fill: '#FEF3EF' }}
+            cursor={{ fill: 'rgba(255,255,255,0.03)' }}
             contentStyle={{ 
-              borderRadius: '12px', 
-              border: '1px solid rgba(17,17,16,0.07)', 
+              backgroundColor: 'rgba(10,10,10,0.85)',
+              borderRadius: '16px', 
+              border: '1px solid rgba(255,255,255,0.1)', 
               fontFamily: 'DM Sans',
-              boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)'
+              color: '#fff',
+              backdropFilter: 'blur(12px)',
+              boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.5)'
             }}
           />
-          <Bar dataKey="score" radius={[0, 4, 4, 0]} barSize={24}>
+          <Bar dataKey="score" radius={[0, 6, 6, 0]} barSize={28}>
             {data.map((entry, index) => (
               <Cell 
                 key={`cell-${index}`} 
                 fill={index === 0 ? '#E8522A' : '#F2724D'} 
-                fillOpacity={1 - index * 0.08}
+                fillOpacity={1 - index * 0.12}
+                className="hover:opacity-80 transition-opacity duration-300 cursor-pointer"
               />
             ))}
           </Bar>
