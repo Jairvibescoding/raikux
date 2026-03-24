@@ -5,6 +5,7 @@ import HeroSection from '../components/HeroSection.astro';
 import NewsFeed from '../components/NewsFeed.tsx';
 import RankingTable from '../components/RankingTable.tsx';
 import RankingChart from '../components/RankingChart.tsx';
+import VideoInsights from '../components/VideoInsights.tsx';
 import { mockMetrics } from '../lib/mockData';
 import { getAIRankings } from '../lib/supabase';
 
@@ -13,21 +14,21 @@ const top5Rankings = rankings.slice(0, 5);
 const chartData = rankings.slice(0, 10).map(m => ({ name: m.name, score: m.score }));
 ---
 
-<BaseLayout title="Dashboard — IA, Marketing & Dev" currentPath="/">
+<BaseLayout title="Dashboard Cinematográfico — IA & Marketing" currentPath="/">
   <Navbar />
   
   <main>
     <HeroSection />
 
     <!-- Metrics Grid -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-10">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-30" data-animate>
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-        {mockMetrics.map((metric) => (
-          <div class="bg-white border border-border p-6 rounded-2xl shadow-xl shadow-ink/5">
-            <p class="text-ink-faint text-xs font-bold uppercase tracking-widest mb-2">{metric.label}</p>
+        {mockMetrics.map((metric, idx) => (
+          <div class="glass-panel border border-white/10 p-6 hover:-translate-y-2 transition-transform duration-300 hover:border-orange/30 hover:shadow-[0_20px_40px_-5px_rgba(232,82,42,0.2)] group" style={`animation-delay: ${idx * 100}ms`}>
+            <p class="text-orange text-xs font-bold uppercase tracking-widest mb-2 drop-shadow-md">{metric.label}</p>
             <div class="flex items-end justify-between">
-              <h4 class="font-display text-3xl text-ink leading-none">{metric.value}</h4>
-              <span class="text-green-600 text-xs font-bold">{metric.trend}</span>
+              <h4 class="font-display text-4xl text-white leading-none drop-shadow-lg group-hover:scale-105 transition-transform">{metric.value}</h4>
+              <span class="bg-white/5 backdrop-blur-md px-2 py-1 rounded border border-white/5 text-green-400 text-xs font-bold shadow-md">{metric.trend}</span>
             </div>
           </div>
         ))}
@@ -35,33 +36,37 @@ const chartData = rankings.slice(0, 10).map(m => ({ name: m.name, score: m.score
     </section>
 
     <!-- Top Ranking Section -->
-    <section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="mb-12">
-        <h2 class="font-display text-[1.8rem] text-ink tracking-tighter mb-4 leading-none uppercase">
-          Top <span class="text-orange">Rankings</span> IA
-        </h2>
-        <p class="text-ink-mid text-lg font-medium italic opacity-70">
-          Modelos con mejor desempeño en benchmarks de razonamiento.
-        </p>
+    <section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-animate>
+      <div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+          <h2 class="font-display text-[2.5rem] md:text-[3rem] text-white tracking-tighter mb-2 leading-none uppercase drop-shadow-lg">
+            Top <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-light to-orange drop-shadow-none">Rankings</span> IA
+          </h2>
+          <p class="text-ink-mid text-lg max-w-xl">
+            Modelos con mejor desempeño en benchmarks de razonamiento.
+          </p>
+        </div>
+        <a href="/raikux/ranking/" class="inline-flex items-center gap-2 text-white/50 font-bold uppercase tracking-widest text-xs hover:text-orange hover:translate-x-2 transition-all">
+          Ver ranking completo <span>→</span>
+        </a>
       </div>
       
       <RankingTable client:load data={top5Rankings} />
-      
-      <div class="mt-8 text-center">
-        <a href="/raikux/ranking/" class="inline-flex items-center gap-2 text-ink font-bold uppercase tracking-widest text-sm hover:text-orange transition-colors">
-          Ver ranking completo
-          <span>→</span>
-        </a>
-      </div>
     </section>
 
+    <!-- Video Insights Widget -->
+    <VideoInsights client:load />
+
     <!-- News Grid -->
-    <section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="mb-12">
-        <h2 class="font-display text-[1.8rem] text-ink tracking-tighter mb-4 leading-none uppercase">
-          Últimas <span class="text-orange">Noticias</span>
+    <section class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/5 relative" data-animate>
+      <!-- Ambient Glow -->
+      <div class="absolute inset-0 bg-gradient-to-b from-orange/5 to-transparent opacity-50 pointer-events-none"></div>
+
+      <div class="relative z-10 mb-12">
+        <h2 class="font-display text-[2.5rem] md:text-[3rem] text-white tracking-tighter mb-2 leading-none uppercase drop-shadow-lg">
+          Últimas <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-light to-orange drop-shadow-none">Noticias</span>
         </h2>
-        <p class="text-ink-mid text-lg font-medium italic opacity-70">
+        <p class="text-ink-mid text-lg max-w-xl">
           Actualización en tiempo real desde las mejores fuentes globales.
         </p>
       </div>
@@ -69,14 +74,15 @@ const chartData = rankings.slice(0, 10).map(m => ({ name: m.name, score: m.score
     </section>
 
     <!-- Chart Section -->
-    <section class="py-24 bg-ink">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="mb-12 text-center">
-          <h2 class="font-display text-[1.8rem] text-white tracking-tighter mb-4 leading-none uppercase">
-            Tendencias de <span class="text-orange">Poder</span>
+    <section class="py-24 bg-surface-elevated relative overflow-hidden" data-animate>
+      <div class="absolute -top-[50%] -right-[20%] w-full h-[150%] bg-gradient-to-bl from-orange/10 via-transparent to-transparent pointer-events-none"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="mb-14 text-center">
+          <h2 class="font-display text-[2.5rem] md:text-[3rem] text-white tracking-tighter mb-4 leading-none uppercase drop-shadow-lg">
+            Tendencias de <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-light to-orange drop-shadow-none">Poder</span>
           </h2>
-          <p class="text-white/50 text-lg font-medium italic">
-            Visualización comparativa de los modelos más avanzados.
+          <p class="text-ink-mid text-lg max-w-2xl mx-auto">
+            Visualización comparativa estructural de los modelos más avanzados.
           </p>
         </div>
         
@@ -85,10 +91,15 @@ const chartData = rankings.slice(0, 10).map(m => ({ name: m.name, score: m.score
     </section>
   </main>
 
-  <footer class="bg-surface py-12 border-t border-border">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <p class="text-ink-faint text-sm font-medium">
-        © 2026 RAIKU — Hecho con IA para la próxima era digital.
+  <footer class="bg-surface py-16 border-t border-white/10 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-t from-orange/5 to-transparent pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div class="inline-flex items-center gap-2 mb-6">
+        <span class="w-1.5 h-1.5 bg-orange rounded-full animate-pulse"></span>
+        <span class="font-display text-lg tracking-widest text-white opacity-90">RAIKU</span>
+      </div>
+      <p class="text-ink-faint text-xs font-bold uppercase tracking-[0.2em]">
+        © 2026 RAIKU — <span class="text-orange-light opacity-80">Hecho con IA para la próxima era digital.</span>
       </p>
     </div>
   </footer>
