@@ -3,7 +3,7 @@ title: "Cómo usar IA para escribir campañas de marketing en 2026"
 date: 2026-03-24
 author: "Richard Jair"
 category: "Marketing"
-thumbnail: "/images/blog/marketing-ia.jpg"
+thumbnail: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1600&h=900&fit=crop"
 description: "Descubre las mejores estrategias para usar agentes autónomos y modelos avanzados en tus campañas publicitarias este año."
 ---
 
@@ -16,3 +16,7 @@ En lugar de crear 5 variantes de un anuncio, hoy los modelos generan miles de va
 
 ## 2. Agentes vs Prompts
 Ya no hacemos "prompting" básico. Construimos pipelines donde un agente investiga el mercado, otro redacta y un tercero audita el tono de voz de la marca.
+
+<div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl my-8">
+  <iframe src="https://www.youtube.com/embed/SQRp4YwVxy?modestbranding=1&rel=0" className="absolute inset-0 w-full h-full" allowFullScreen></iframe>
+</div>

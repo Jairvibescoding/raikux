@@ -3,7 +3,7 @@ title: "Cursor vs Trae vs Antigravity: cuál editor usar según tu proyecto"
 date: 2026-03-20
 author: "Richard Jair"
 category: "Dev"
-thumbnail: "/images/blog/editors-ai.jpg"
+thumbnail: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1600&h=900&fit=crop"
 description: "Una comparativa técnica exhaustiva de los tres gigantes de la programación asistida por IA."
 ---
 

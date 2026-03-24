@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Navbar from '../../components/Navbar.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Navbar from '../../../components/Navbar.astro';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -41,27 +41,56 @@ const articleUrl = `${siteUrl}/raikux/blog/${post.id}`;
     }
   })} />
   
-  <article class="max-w-3xl mx-auto px-4 sm:px-6 py-24">
-    <header class="mb-14 text-center animate-fade-up">
-      <div class="flex items-center justify-center gap-3 mb-6">
-        <span class="label-tag text-orange bg-orange/10 border border-orange/20 px-4 py-1.5 rounded-full">{post.data.category}</span>
-        <span class="text-ink-mid text-sm font-medium">{post.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-      </div>
-      <h1 class="font-display text-4xl md:text-5xl text-white mb-8 leading-[1.15]">{post.data.title}</h1>
-      <div class="flex items-center justify-center gap-4 text-ink-mid pt-4 border-t border-border/50 max-w-xs mx-auto">
-        <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-orange to-orange-deep flex items-center justify-center text-white font-bold shadow-lg shadow-orange/20">RJ</div>
-        <div class="text-left">
-          <div class="font-medium text-white text-base">{post.data.author}</div>
-          <div class="text-xs text-white/50 tracking-widest uppercase mt-0.5">Autor</div>
+  <div class="relative w-full h-[65vh] md:h-[75vh] flex items-end justify-center overflow-hidden bg-black -mt-20">
+    {post.data.thumbnail && (
+      <img 
+        src={post.data.thumbnail} 
+        alt={post.data.title} 
+        class="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-screen animate-fade-in transition-transform duration-[0ms]"
+        id="parallax-bg"
+      />
+    )}
+    
+    <div class="absolute inset-0 bg-gradient-to-t from-surface via-surface/60 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent z-10 h-32 mt-auto pointer-events-none"></div>
+    
+    <div class="relative z-20 w-full max-w-4xl mx-auto px-4 sm:px-6 pb-20 md:pb-28">
+      <div class="animate-fade-up">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="label-tag text-orange bg-black/40 backdrop-blur-xl border border-white/10 px-5 py-2 rounded-full shadow-lg shadow-orange/10">{post.data.category}</span>
+          <span class="text-white/60 text-sm font-medium tracking-widest">{post.data.date.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+        </div>
+        <h1 class="font-display text-4xl md:text-6xl text-white mb-8 leading-[1.05] drop-shadow-2xl">{post.data.title}</h1>
+        <div class="flex items-center gap-4 text-white">
+          <div class="w-14 h-14 rounded-full bg-gradient-to-tr from-orange to-orange-deep flex items-center justify-center font-bold shadow-[0_0_20px_rgba(232,82,42,0.4)] border border-orange/30 text-lg">RJ</div>
+          <div>
+            <div class="font-bold text-white text-lg drop-shadow-md">{post.data.author}</div>
+            <div class="text-xs text-orange-pale/60 tracking-widest uppercase mt-0.5">Analista Principal</div>
+          </div>
         </div>
       </div>
-    </header>
+    </div>
+  </div>
 
-    <!-- Content -->
-    <div class="glass-panel p-8 md:p-12 animate-fade-up animate-delay-200">
-      <div class="prose prose-invert prose-orange max-w-none prose-headings:font-display prose-headings:tracking-tight prose-a:text-orange hover:prose-a:text-orange-light prose-p:text-ink-mid prose-p:leading-relaxed prose-li:text-ink-mid prose-strong:text-white">
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 py-12 relative z-30 -mt-24 md:-mt-32">
+    <div class="glass-panel p-8 md:p-16 animate-fade-up animate-delay-200 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] border border-white/10 rounded-3xl bg-surface-elevated/95">
+      <div class="prose prose-invert prose-orange max-w-none prose-headings:font-display prose-headings:tracking-tight prose-a:text-orange hover:prose-a:text-orange-light prose-p:text-white/70 prose-p:leading-[1.8] prose-p:text-lg prose-li:text-white/70 prose-li:text-lg prose-strong:text-white prose-img:rounded-2xl prose-img:w-full prose-img:shadow-xl prose-hr:border-white/10">
         <Content />
       </div>
     </div>
   </article>
+
+  <script>
+    // Parallax Effect
+    document.addEventListener('astro:page-load', () => {
+      const bg = document.getElementById('parallax-bg');
+      if (bg) {
+        window.addEventListener('scroll', () => {
+          const scroll = window.scrollY;
+          // Apply a subtle parallax translation to the image
+          bg.style.transform = `translateY(${scroll * 0.35}px)`;
+        });
+      }
+    });
+  </script>
 </BaseLayout>
